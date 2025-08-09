@@ -7,7 +7,7 @@ const HomePage = ()=>{
             <h1> home</h1>
             </Link>
              <Link to="/create">
-            <h1> Create</h1>
+            <h1> Create Account</h1>
             </Link>
              <Link to="/account">
             <h1>Display Accounts</h1>

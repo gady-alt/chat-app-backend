@@ -1,26 +1,20 @@
-import supabase from "../config/superbase"
 import { useState, useEffect } from "react"
-const Account = ()=>{
+const Account = ({API})=>{
     const[fetchError, SetFetchError]= useState(null)
     const[accounts, SetAccounts]= useState(null)
     useEffect(()=>{
-        const fetchAccounts= async()=>{
-            const{data, error}= await supabase
-            .from("accounts")
-            .select()
-            
-            if(error){
-                SetFetchError("Couldn't fetch no account")
-                SetAccounts(null)
-            }
-            if(data){
-                console.log(data)
-                SetAccounts(data)
-                SetFetchError(null)
-            }
+          const loadAccounts= async()=>{
+            const data= await API.fetchAccounts()
+            if(!data){
+            SetFetchError("can't fetch any data") 
+            SetAccounts(null)
+          }else{
+            SetAccounts(data)
+            SetFetchError(null)
+          }
         }
-        fetchAccounts()
-    },[])
+        loadAccounts()
+    },[API])
     return(
         <div className="page Account">
             <h1> Account</h1>
